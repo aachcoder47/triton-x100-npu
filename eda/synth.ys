@@ -1,0 +1,22 @@
+# ==============================================================================
+# Yosys Synthesis Script for Triton-X100 Tile Execution Unit (TEU)
+# Target: Generic ASIC / Standard Cell Library Mapping
+# ==============================================================================
+
+# Read Verilog RTL source files
+read_verilog rtl/triton_mac_pe.v
+read_verilog rtl/triton_systolic_tile.v
+read_verilog rtl/triton_tile_dma.v
+read_verilog rtl/triton_teu_top.v
+
+# Synthesize top module and flatten hierarchy
+synth -top triton_teu_top -flatten
+
+# Clean and optimize
+clean
+
+# Print cell and area statistics
+stat
+
+# Write gate-level synthesized netlist
+write_verilog -noattr eda/synthesized_netlist.v

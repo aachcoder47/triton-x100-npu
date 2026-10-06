@@ -1,0 +1,58 @@
+---
+# Tiny Tapeout Project Configuration
+project:
+  title: "Triton-X100 Tile NPU Core"
+  author: "Triton-X100 Team"
+  discord: ""
+  description: "2D Systolic Tensor Core and Asynchronous Tile DMA Co-Designed for OpenAI Triton"
+  language: "Verilog"
+  clock_hz: 10000000
+
+# How many tiles your design takes? 1x1, 1x2, 2x2, etc.
+  tiles: "1x1"
+
+# Your top module name must start with "tt_um_"
+  top_module: "tt_um_triton_tile_npu"
+
+# List your project's source files here (relative to src/)
+  source_files:
+    - "tt_um_triton_tile_npu.v"
+    - "triton_teu_top.v"
+    - "triton_systolic_tile.v"
+    - "triton_mac_pe.v"
+    - "triton_tile_dma.v"
+
+# Pinout definition
+pinout:
+  # Dedicated inputs
+  ui[0]: "A operand bit 0"
+  ui[1]: "A operand bit 1"
+  ui[2]: "A operand bit 2"
+  ui[3]: "B operand bit 0"
+  ui[4]: "B operand bit 1"
+  ui[5]: "B operand bit 2"
+  ui[6]: "Clear Accumulator"
+  ui[7]: "Compute Enable"
+
+  # Dedicated outputs
+  uo[0]: "Matrix C accumulator bit 0"
+  uo[1]: "Matrix C accumulator bit 1"
+  uo[2]: "Matrix C accumulator bit 2"
+  uo[3]: "Matrix C accumulator bit 3"
+  uo[4]: "Matrix C accumulator bit 4"
+  uo[5]: "Matrix C accumulator bit 5"
+  uo[6]: "Matrix C accumulator bit 6"
+  uo[7]: "Matrix C accumulator bit 7"
+
+  # Bidirectional IOs
+  uio[0]: "DMA Start (in)"
+  uio[1]: "DMA Stride bit 0 (in)"
+  uio[2]: "DMA Stride bit 1 (in)"
+  uio[3]: "DMA Stride bit 2 (in)"
+  uio[4]: "DMA Busy (out)"
+  uio[5]: "DMA Done (out)"
+  uio[6]: "Memory Req Valid (out)"
+  uio[7]: "Memory Req LSB (out)"
+
+# Do not change
+yaml_version: 6
